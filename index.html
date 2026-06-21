@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>海に流れ込むプラスチックの量を、想像できますか？</title>
+  <meta name="description" content="Three.jsの3D表現で海洋プラスチックごみのスケール、種類、マイクロプラスチック、私たちにできる行動を学ぶ中学生向け教材です。" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">本文へスキップ</a>
+
+  <header class="hero" aria-labelledby="hero-title">
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <p class="eyebrow">中学校 技術・家庭科 / 環境学習 / 探究学習</p>
+      <h1 id="hero-title">海に流れ込むプラスチックの量を、想像できますか？</h1>
+      <p class="lead">便利な材料であるプラスチック。けれど、使い終わった後の流れを考えないと、海や川にたまり続けます。</p>
+      <div class="hero__stats" role="list" aria-label="この教材で扱う主な数字">
+        <div role="listitem"><strong>800万t</strong><span>代表的な説明で使われる年間流入量</span></div>
+        <div role="listitem"><strong>1100万t</strong><span>国連系資料で示される現在の目安</span></div>
+        <div role="listitem"><strong>1900〜2300万t</strong><span>水域への漏出推計</span></div>
+      </div>
+      <p class="scroll-hint">スクロールすると、海の中のプラスチック片が増えていきます。</p>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section intro" aria-labelledby="intro-title">
+      <div class="section__inner narrow">
+        <p class="section-kicker">まず考えよう</p>
+        <h2 id="intro-title">「800万トン」って、どれくらい？</h2>
+        <p>数字だけでは、量の大きさを想像しにくいものです。このページでは、飛行機の重さ、魚とプラスチックの比較、身近な樹脂の種類から、海洋プラスチックごみを学びます。</p>
+        <p class="note">3Dが表示されない環境でも、本文と数値だけで学べるように作っています。</p>
+      </div>
+    </section>
+
+    <section class="section scale" aria-labelledby="scale-title">
+      <div class="section__inner grid two-columns">
+        <div>
+          <p class="section-kicker">スケール比較</p>
+          <h2 id="scale-title">ジャンボジェット機で考えると？</h2>
+          <p>Boeing 747-8の最大離陸重量を <strong>442.3トン</strong> として割り算します。推計値は幅があるため、複数の見方を切り替えて比べます。</p>
+          <div class="scale-tabs" role="tablist" aria-label="比較するプラスチック量">
+            <button class="tab is-active" type="button" data-scale-key="eightMt">年間800万トン</button>
+            <button class="tab" type="button" data-scale-key="elevenMt">年間1100万トン</button>
+            <button class="tab" type="button" data-scale-key="nineteenMt">1900万トン</button>
+            <button class="tab" type="button" data-scale-key="twentyThreeMt">2300万トン</button>
+          </div>
+          <article class="scale-card" aria-live="polite">
+            <span class="label" id="scale-label">年間800万トン</span>
+            <strong id="plane-count">約18,087機分</strong>
+            <p id="scale-description">代表的な説明で使われる海への年間流入量です。</p>
+            <p class="icon-note">この3Dの1機アイコン＝約1,000機分として表示しています。</p>
+          </article>
+        </div>
+        <div class="visual-panel">
+          <canvas id="plane-canvas" aria-hidden="true"></canvas>
+          <p class="fallback-text">3D表示の代わりに、選んだ量がBoeing 747-8何機分に近いかを左側に表示しています。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section forecast" aria-labelledby="forecast-title">
+      <div class="section__inner grid two-columns">
+        <div>
+          <p class="section-kicker">2050年の条件つき予測</p>
+          <h2 id="forecast-title">このままなら、魚の重量を上回る可能性</h2>
+          <p>対策が十分に進まない場合、2050年には海のプラスチックが魚の重量を上回る可能性がある、という予測があります。</p>
+          <p class="warning">これは将来予測です。現在確定している事実ではありません。社会の対策や技術で変えられる未来です。</p>
+        </div>
+        <div class="weight-visual" aria-label="魚とプラスチックの重さの比較イメージ">
+          <div class="bar fish"><span>魚</span></div>
+          <div class="bar plastic"><span>プラスチック（対策が進まない場合）</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section types" aria-labelledby="types-title">
+      <div class="section__inner">
+        <p class="section-kicker">材料の種類</p>
+        <h2 id="types-title">プラスチックにも種類がある</h2>
+        <p>三角の識別コードは「必ずリサイクルできる」という意味ではありません。主に樹脂の種類を示す目印です。</p>
+        <div class="type-grid" id="plastic-types"></div>
+      </div>
+    </section>
+
+    <section class="section micro" aria-labelledby="micro-title">
+      <div class="section__inner grid two-columns">
+        <div>
+          <p class="section-kicker">マイクロプラスチック</p>
+          <h2 id="micro-title">小さくなったプラスチックは、どこへ行く？</h2>
+          <p>マイクロプラスチックは、一般に <strong>5mm未満</strong> の小さなプラスチック片です。大きなごみが紫外線や波で砕けることがあります。</p>
+          <div class="fact-split">
+            <div><h3>分かっていること</h3><p>小さくなるほど回収が難しくなり、生き物が誤って食べる可能性があります。</p></div>
+            <div><h3>研究中のこと</h3><p>食物連鎖や人体への影響は研究が続いており、分からない点もあります。</p></div>
+          </div>
+        </div>
+        <div class="micro-demo" aria-hidden="true">
+          <div class="sun"></div>
+          <div class="big-piece"></div>
+          <span class="particle p1"></span><span class="particle p2"></span><span class="particle p3"></span><span class="particle p4"></span><span class="particle p5"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section why" aria-labelledby="why-title">
+      <div class="section__inner narrow">
+        <p class="section-kicker">便利さと課題</p>
+        <h2 id="why-title">便利な材料を、どう使えばよい？</h2>
+        <p>プラスチックは軽い、安い、丈夫、衛生的です。医療、食品保存、家電、自動車などにも使われています。だから「プラスチック＝悪」と単純化せず、必要なものは適切に使い、使い捨てを減らすことが大切です。</p>
+        <ul class="check-list">
+          <li>回収しやすい仕組みを作る。</li>
+          <li>分別しやすい材料を選ぶ。</li>
+          <li>長く使える設計にする。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section actions" aria-labelledby="actions-title">
+      <div class="section__inner">
+        <p class="section-kicker">私たちにできること</p>
+        <h2 id="actions-title">今日の行動と、設計する人の視点</h2>
+        <div class="action-grid">
+          <article><h3>使う人</h3><ul><li>使い捨てを減らす</li><li>長く使えるものを選ぶ</li><li>分別ルールを守る</li><li>ポイ捨てしない</li><li>学校や地域でごみの流れを調べる</li></ul></article>
+          <article><h3>設計する人</h3><ul><li>リサイクルしやすい材料を選ぶ</li><li>分解しやすい構造にする</li><li>詰め替えや再使用を考える</li><li>使い終わった後の回収まで設計する</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section summary" aria-labelledby="summary-title">
+      <div class="section__inner narrow">
+        <p class="section-kicker">まとめ</p>
+        <h2 id="summary-title">問題は大きい。でも、減らすことはできる。</h2>
+        <p>設計・使い方・回収のしくみを変えれば、海へ流れ込むプラスチックを減らせます。よりよい生活と持続可能な社会のために、材料の選択と使い方を考えましょう。</p>
+      </div>
+    </section>
+
+    <section class="section sources" aria-labelledby="sources-title">
+      <div class="section__inner narrow">
+        <h2 id="sources-title">出典・数値の扱い</h2>
+        <ul id="source-list"></ul>
+        <p class="note">数値は推計や条件つき予測を含みます。授業で使う場合は、最新資料に合わせて <code>main.js</code> の <code>data</code> オブジェクトを更新してください。</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
